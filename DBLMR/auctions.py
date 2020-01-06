@@ -31,7 +31,7 @@ class Auctions:
         return [Bidder(user) for user in fetch("/api/auctions/bidders/", self.token)["bidders"]]
 
     @property
-    def bet(self):
+    def bets(self):
         """:returns an array of active bidder objects.
         :rtype list[object]"""
         return [Bet(user) for user in fetch("/api/auctions/active/", self.token)["activebids"]]
