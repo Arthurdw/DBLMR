@@ -1,6 +1,6 @@
 from DBLMR import DBLMR
 
-client = DBLMR.Client("232182858251239424-PBx7tlU1AySgU7R9kEmh8JyPepEnd8Xo")
+client = DBLMR.Client("Your Token")
 bot = client.bot(432616859263827988)
 
 
@@ -25,3 +25,7 @@ print("Monthly rank: " + str(bot.rank.daily))
 print("All-time rank: " + str(bot.rank.all))
 print("Server count rank: " + str(bot.rank.servers))
 print("Shard count rank: " + str(bot.rank.shards))
+
+print("Auctions total bids:  $" + str(client.auctions.stats.value))
+print("Total bids:  " + str(client.auctions.stats.bids))
+print("Auctions current bids:  $" + str(client.auctions.stats.current))

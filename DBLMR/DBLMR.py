@@ -1,5 +1,5 @@
 from requests import get
-from DBLMR import error, bot, user
+from DBLMR import error, bot, user, auctions
 
 
 class Client:
@@ -14,7 +14,13 @@ class Client:
         :rtype object"""
         return user.User(self.token)
 
+    @property
+    def auctions(self):
+        """:returns a auction object!
+        :rtype object"""
+        return auctions.Auctions(self.token)
+
     def bot(self, bot_id: int):
-        """:returns a bot object
+        """:returns a bot object!
         :rtype object"""
         return bot.Bot(self.token, bot_id)

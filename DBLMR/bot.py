@@ -9,10 +9,10 @@ class Bot:
         r = requests.get("https://dbl.marcorennmaus.de/api/bot/" + str(bot_id), headers={'Authorization': token})
         if r.status_code != 404:
             self.selected = r
-        if self.selected.status_code == 429:
+        elif r.status_code == 429:
             raise error.TooManyRequestsError("Request limit has been breached.")
         else:
-            error.NotFoundError("Unable to fetch bot!")
+            raise error.NotFoundError("Unable to fetch bot!")
 
     def check(self):
         if self.selected is None:
