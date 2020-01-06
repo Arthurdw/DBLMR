@@ -24,6 +24,12 @@ class Auctions:
         :rtype object"""
         return Stats(self.token)
 
+    @property
+    def bidders(self):
+        """:returns an array of bidder objects.
+        :rtype list[object]"""
+        return [Bidder(user) for user in fetch("/api/auctions/bidders/", self.token)["bidders"]]
+
 
 class Stats:
     def __init__(self, token):
@@ -43,7 +49,31 @@ class Stats:
 
     @property
     def current(self):
-        """:returns sum of all active bids this week.
-        :rtype int"""
-        print(self.selected)
+        """:returns sum of all active bids this week if there were bids, else it returns `None`.
+        :rtype int or None"""
+        if self.selected["currentvalue"] is None:
+            return None
         return int(self.selected["currentvalue"])
+
+
+class Bidder:
+    def __init__(self, bidder):
+        self.selected = bidder
+
+    @property
+    def id(self):
+        """:returns the bidder their ID.
+        :rtype int"""
+        return int(self.selected["userid"])
+
+    @property
+    def name(self):
+        """:returns the bidder their username.
+        :rtype str"""
+        return str(self.selected["username"])
+
+    @property
+    def bet(self):
+        """:returns the bet that the bidder place.
+        :rtype int"""
+        return int(self.selected["amount"])

@@ -29,3 +29,8 @@ print("Shard count rank: " + str(bot.rank.shards))
 print("Auctions total bids:  $" + str(client.auctions.stats.value))
 print("Total bids:  " + str(client.auctions.stats.bids))
 print("Auctions current bids:  $" + str(client.auctions.stats.current))
+
+count = 1
+for bidder in client.auctions.bidders:
+    print(f"{count}\t| ${bidder.bet}\t| {bidder.name}\t- {bidder.id}")
+    count += 1
