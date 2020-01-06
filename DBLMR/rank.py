@@ -2,8 +2,6 @@ class Rank:
     def __init__(self, rank):
         self.rank = rank
 
-    # {'monthlyPoints': 5, 'allTimePoints': 9, 'serverCount': 77, 'shardCount': 2538, 'dailyPoints': 7993}
-
     @property
     def daily(self):
         """:returns the bot its rank position ordered by amount of points gained in the last 24 rolling hours.
