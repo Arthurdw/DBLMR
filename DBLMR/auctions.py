@@ -30,6 +30,12 @@ class Auctions:
         :rtype list[object]"""
         return [Bidder(user) for user in fetch("/api/auctions/bidders/", self.token)["bidders"]]
 
+    @property
+    def bet(self):
+        """:returns an array of active bidder objects.
+        :rtype list[object]"""
+        return [Bet(user) for user in fetch("/api/auctions/active/", self.token)["activebids"]]
+
 
 class Stats:
     def __init__(self, token):
@@ -77,3 +83,38 @@ class Bidder:
         """:returns the bet that the bidder place.
         :rtype int"""
         return int(self.selected["amount"])
+
+
+class Bet:
+    def __init__(self, bidder):
+        self.selected = bidder
+
+    @property
+    def id(self):
+        """:returns the active bidder their ID.
+        :rtype int"""
+        return int(self.selected["userid"])
+
+    @property
+    def name(self):
+        """:returns the active bidder their username.
+        :rtype str"""
+        return str(self.selected["username"])
+
+    @property
+    def bet(self):
+        """:returns the active bet that the bidder place.
+        :rtype int"""
+        return int(self.selected["amount"])
+
+    @property
+    def slot(self):
+        """:returns the active bet its Auction Slot.
+        :rtype str"""
+        return str(self.selected["slot"])
+
+    @property
+    def item(self):
+        """:returns the name of the active bet its item name.
+        :rtype str"""
+        return str(self.selected["item"])
