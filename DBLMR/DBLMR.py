@@ -1,37 +1,20 @@
-# import error
-import requests
-import json
+from requests import get
+from DBLMR import error, bot, user
 
 
-class User:
+class Client:
     def __init__(self, token):
         self.token = token
-        self.url = "https://dbl.marcorennmaus.de"
-        self.quota = "/api/quota/"
+        if get("https://dbl.marcorennmaus.de/api/quota/", headers={'Authorization': token}).status_code == 401:
+            raise error.UnauthorizedError("An invalid token was given on setup!")
 
     @property
-    def get_token(self):
-        """:returns the secret token!
-        :rtype str"""
-        return self.token
+    def user(self):
+        """":returns a user object!
+        :rtype object"""
+        return user.User(self.token)
 
-    @property
-    def id(self):
-        """":returns the ID of the user that this token belongs to.
-        :rtype int"""
-        r = requests.get(self.url + self.quota, headers={'Authorization': self.token}).text
-        return int(json.loads(r)['userid'])
-
-    @property
-    def requests(self):
-        """":returns the used quota of the current minute!
-        :rtype int"""
-        r = requests.get(self.url + self.quota, headers={'Authorization': self.token}).text
-        return json.loads(r)['requests']
-
-    @property
-    def limit(self):
-        """":returns the quota limit of this user!
-        :rtype int"""
-        r = requests.get(self.url + self.quota, headers={'Authorization': self.token}).text
-        return json.loads(r)['ratelimit']
+    def bot(self, bot_id: int):
+        """:returns a bot object
+        :rtype object"""
+        return bot.Bot(self.token, bot_id)
