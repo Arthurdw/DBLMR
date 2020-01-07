@@ -7,7 +7,7 @@ class Stats:
     def __init__(self, token):
         self.token = token
         self.selected = None
-        r = requests.get("https://dbl.marcorennmaus.de/api/stats/", headers={'Authorization': token})
+        r = requests.get("https://dbl.marcorennmaus.de/api/totals/", headers={'Authorization': token})
         if r.status_code != 404:
             self.selected = json.loads(r.text)
         elif r.status_code == 429:
