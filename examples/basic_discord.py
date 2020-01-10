@@ -4,7 +4,7 @@ from DBLMR import DBLMR, error
 
 client = None
 try:
-    client = DBLMR.Client("232182858251239424-ezzPvjaoqsCBXOuQSYk9plJ6XTlmhQeX")
+    client = DBLMR.Client("XXXYOURDBLMRSECRETXXX")
 except error.UnauthorizedError:
     print("Invalid DBLMR token!")
 
@@ -30,7 +30,7 @@ class Bot(commands.Bot):
         self.add_cog(DBLMR(self.user))
 
     def run(self):
-        super().run("NjQwNjI1NjgzNzk3NjM5MTgx.Xb8oCQ.rE0mGSMqjN-HfIfl-rRztYmhHXM", reconnect=True)
+        super().run("XXXYOURDISCORDBOTTOKENXXX", reconnect=True)
 
     async def on_ready(self):
         print('Logged in as:')
