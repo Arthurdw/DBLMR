@@ -6,6 +6,8 @@ from DBLMR import error
 class User:
     def __init__(self, token):
         self.selected = requests.get("https://dbl.marcorennmaus.de/api/quota/", headers={'Authorization': token})
+        if self.selected.status_code == 401:
+            raise error.UnauthorizedError("An invalid token was given!")
 
     @property
     def id(self):

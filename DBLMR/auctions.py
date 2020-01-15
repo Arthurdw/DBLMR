@@ -8,6 +8,8 @@ def fetch(url, token):
     r = requests.get("https://dbl.marcorennmaus.de" + url, headers={'Authorization': token})
     if r.status_code != 404:
         return json.loads(r.text)
+    if r.status_code == 401:
+        raise error.UnauthorizedError("An invalid token was given!")
     elif r.status_code == 429:
         raise error.TooManyRequestsError("Request limit has been breached.")
     else:

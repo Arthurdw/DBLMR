@@ -9,6 +9,8 @@ class Bot:
         r = requests.get("https://dbl.marcorennmaus.de/api/bot/" + str(bot_id), headers={'Authorization': token})
         if r.status_code != 404:
             self.selected = r
+        if r.status_code == 401:
+            raise error.UnauthorizedError("An invalid token was given!")
         elif r.status_code == 429:
             raise error.TooManyRequestsError("Request limit has been breached.")
         else:
