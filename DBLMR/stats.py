@@ -10,7 +10,7 @@ class Stats:
         r = requests.get("https://dbl.marcorennmaus.de/api/totals/", headers={'Authorization': token})
         if r.status_code != 404:
             self.selected = json.loads(r.text)
-        if r.status_code == 401:
+        elif r.status_code == 401:
             raise error.UnauthorizedError("An invalid token was given!")
         elif r.status_code == 429:
             raise error.TooManyRequestsError("Request limit has been breached.")

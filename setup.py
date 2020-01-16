@@ -8,7 +8,7 @@ setup(
   author='Arthurdw (Arthur De Witte)',
   author_email='mail.arthurdw@gmail.com',
   url='https://github.com/Arthurdw/DBLMR',
-  download_url='https://github.com/Arthurdw/DBLMR/archive/v0.1.tar.gz',
+  download_url='https://github.com/Arthurdw/DBLMR/archive/v0.2.tar.gz',
   keywords=['DBL', 'API', 'wrapper', 'Marco'],
   install_requires=['requests'],
   classifiers=[
